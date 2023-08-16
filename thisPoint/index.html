@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>点我看this</button>
+  <script>
+    // 普通函数（声明函数）
+    function bar() { console.log(this) }
+    bar() //window
+
+    // 构造函数
+    function Person(age, name) {
+      this.age = age;
+      this.name = name
+      console.log(this)  // 此处 this 分别指向 Person 的实例对象 p1 p2
+    }
+    var p1 = new Person(18, 'zs')//Person {age: 18, name: 'zs'}
+    var p2 = new Person(18, 'ww')//Person {age: 18, name: 'ww'}
+
+
+    // 对象方法
+    var obj = {
+      fn: function () {
+        console.log(this); // obj
+      }
+    }
+    obj.fn();//this指向obj
+
+    // 事件处理函数
+    var btn = document.querySelector("button")
+    btn.addEventListener('click', function () {
+      console.log(this) //btn
+    })
+
+    // 构造器调用
+    //不使用new指向window
+    function Person1(name) {
+      console.log(this) // window
+      this.name = name;
+    }
+    Person1('inwe')
+    //使用new
+    function Person2(name) {
+      this.name = name
+      console.log(this) //people
+      self = this
+    }
+    var people = new Person2('iwen')
+    console.log(self === people) //true
+    //这里new改变了this指向，将this由window指向Person的实例对象people
+    //但是，如果显式的返回了一个object对象，那么此次运算结果最终会返回这个对象。
+    var MyClass = function () {
+      this.name = 1;
+      return {
+        name: 2
+      }
+    }
+    var myClass = new MyClass();
+    console.log('myClass:', myClass.name);//myClass: 2
+
+
+    // 箭头函数中指向外层作用域的 this
+    var obj = {
+      foo() {
+        console.log(this);
+      },
+      bar: () => {
+        console.log(this);
+      }
+    }
+    obj.foo() // {foo: ƒ, bar: ƒ}
+    obj.bar() // window
+
+
+    // call或apply调用 跟普通的函数调用相比，用call和apply可以动态的改变函数的this
+    var obj1 = {
+      name: 1,
+      getName: function (num = '') {
+        return this.name + num;
+      }
+    };
+    var obj2 = {
+      name: 2,
+    };
+    // 可以理解成在 obj2的作用域下调用了 obj1.getName()函数
+    console.log(obj1.getName()); // 1
+    console.log(obj1.getName.call(obj2, 2)); // 2 + 2 = 4
+    console.log(obj1.getName.apply(obj2, [2])); // 2 + 2 = 4
+    // call和apply方法的例子
+    var obj1 = {
+      name: 1,
+      getName: function (num = '') {
+        return this.name + num;
+      }
+    };
+    var obj2 = {
+      name: 2,
+    };
+    // 可以理解成在 obj2的作用域下调用了 obj1.getName()函数
+    console.log(obj1.getName()); // 1
+    console.log(obj1.getName.call(obj2, 2)); // 2 + 2 = 4
+    console.log(obj1.getName.apply(obj2, [2])); // 2 + 2 = 4
+
+
+
+    
+    // 定时器函数 此时 this 指向 window
+    setInterval(function () {
+      console.log(this); // window
+    }, 1000);
+
+
+
+  </script>
+</body>
+
+</html>
