@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--  一.typeof   其中typeof返回的类型都是字符串形式，需注意!!!!! -->
+  <script>
+
+    alert(typeof "helloworld") //   ------------------>"string"     
+    // alert(typeof 123)            // ------------------>"number"
+    // alert(typeof [1, 2, 3])        // ------------------>"object"
+    // alert(typeof new Function()) // ------------------>"function"
+    // alert(typeof new Date())     // ------------------>"object"
+    // alert(typeof new RegExp())   // ------------------>"object"
+    // alert(typeof Symbol())       // ------------------>"symbol"
+    // alert(typeof true)           // ------------------>"true"
+    // alert(typeof null)           // ------------------>"object"
+    // alert(typeof undefined)      // ------------------>"undefined"
+    // alert(typeof 'undefined')    // ------------------>"string"
+  </script>
+  <!-- 二.instance of  instanceof 后面一定要是对象类型，并且大小写不能错，该方法适合一些条件选择或分支。!!!!! -->
+  <script>
+    // ([1, 2, 3] instanceof Array)         //     -------->true
+    // new Date() instanceof Date            // -------->true
+    // new Function() instanceof Function    // -------->true
+    // new Function() instanceof function    // -------->false
+
+  // 三.对象原型链判断方法： Object.prototype.toString.call() 
+    console.log(Object.prototype.toString.call("123"))       //    -------->[object String]
+    console.log(Object.prototype.toString.call(123))            // -------->[object Number]
+    console.log(Object.prototype.toString.call(true))           // -------->[object Boolean]
+    console.log(Object.prototype.toString.call([1, 2, 3]))      // -------->[object Array]
+    console.log(Object.prototype.toString.call(null))           // -------->[object Null]
+    console.log(Object.prototype.toString.call(undefined))      // -------->[object Undefined]
+    console.log(Object.prototype.toString.call({ name: 'Hello' }))// -------->[object Object]
+    console.log(Object.prototype.toString.call(function () { })) // -------->[object Function]
+    console.log(Object.prototype.toString.call(new Date()))     // -------->[object Date]
+    console.log(Object.prototype.toString.call(/\d/))           // -------->[object RegExp]
+    console.log(Object.prototype.toString.call(Symbol()))       // -------->[object Symbol]
+
+
+    
+  </script>
+</body>
+
+</html>
