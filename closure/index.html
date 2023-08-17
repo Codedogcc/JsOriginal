@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>非闭包</h1>
+  <img src="../closure/images/非闭包.png" alt="">
+  <br>
+  <h1>闭包</h1>
+  <img src="../closure/images/闭包.png" alt="">
+  <script>
+    // 闭包实现的主要功能是  实现数据的私有化
+
+    // 非闭包的时候，数据（a）没有实现私有化,可以直接改变a的值
+    let a = 1;
+    function aoo() {
+      a++;
+      console.log("函数aoo被调用了" + a + "次");
+    }
+
+
+    // 闭包的时候，数据（b）实现了私有化，没发改b的值，因为b是内部参数
+    function boo() {
+      let b = 1;
+      function coo() {
+        b++;
+        console.log(`函数boo被调用了${b}次`);
+      }
+      return coo
+    }
+    const res = boo();
+
+  </script>
+</body>
+
+</html>
